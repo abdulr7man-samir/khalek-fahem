@@ -2,7 +2,9 @@ import React, { useState, useMemo } from 'react';
 import Header from './components/Header';
 import CategoryFilter from './components/CategoryFilter';
 import TopicCard from './components/TopicCard';
+import FAQ from './components/FAQ';
 import { topics, Topic } from './data/topics';
+import './App.css';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -15,54 +17,51 @@ function App() {
   }, [selectedCategory]);
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
-      fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
-    }}>
+    <div style={{ minHeight: '100vh' }}>
       <Header />
       
-      <main style={{ padding: '30px 0' }}>
+      <main style={{ padding: '40px 0' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
           <CategoryFilter 
             selectedCategory={selectedCategory}
             onCategoryChange={setSelectedCategory}
           />
           
-          <div style={{ marginTop: '30px' }}>
+          <div style={{ marginTop: '40px' }}>
             <div style={{
               textAlign: 'center',
-              marginBottom: '30px',
-              padding: '20px',
-              background: 'rgba(255, 255, 255, 0.8)',
-              borderRadius: '20px',
-              backdropFilter: 'blur(10px)',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+              marginBottom: '40px',
+              padding: '30px',
+              background: 'rgba(255, 255, 255, 0.9)',
+              borderRadius: '24px',
+              backdropFilter: 'blur(20px)',
+              boxShadow: '0 15px 50px rgba(0, 0, 0, 0.1)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
               direction: 'rtl'
             }}>
               <h2 style={{
-                fontSize: '28px',
+                fontSize: '32px',
                 fontWeight: '800',
                 color: '#2c3e50',
-                marginBottom: '10px'
+                marginBottom: '15px',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
               }}>
-                {selectedCategory === 'all' ? '🌟 جميع المواضيع' : '📋 المواضيع المختارة'}
+                {selectedCategory === 'all' ? '🌟 جميع المواضيع القانونية' : '📋 المواضيع المختارة'}
               </h2>
               <p style={{
-                fontSize: '16px',
+                fontSize: '18px',
                 color: '#7f8c8d',
-                fontWeight: '500'
+                fontWeight: '500',
+                lineHeight: '1.6'
               }}>
-                اختر أي موضوع عشان تعرف حقوقك فيه
+                اختر أي موضوع عشان تعرف حقوقك فيه بشكل مفصل ومبسط
               </p>
             </div>
             
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-              gap: '20px',
-              marginTop: '20px'
-            }}>
+            <div className="topics-grid">
               {filteredTopics.map(topic => (
                 <TopicCard 
                   key={topic.id}
@@ -74,16 +73,28 @@ function App() {
             {filteredTopics.length === 0 && (
               <div style={{
                 textAlign: 'center',
-                padding: '60px 20px',
+                padding: '80px 20px',
                 background: 'rgba(255, 255, 255, 0.9)',
-                borderRadius: '20px',
-                marginTop: '40px'
+                borderRadius: '24px',
+                marginTop: '40px',
+                backdropFilter: 'blur(20px)',
+                boxShadow: '0 15px 50px rgba(0, 0, 0, 0.1)',
+                border: '1px solid rgba(255, 255, 255, 0.2)'
               }}>
-                <div style={{ fontSize: '80px', marginBottom: '20px' }}>😔</div>
-                <h3 style={{ fontSize: '24px', color: '#34495e', marginBottom: '10px' }}>
+                <div style={{ fontSize: '100px', marginBottom: '30px' }}>😔</div>
+                <h3 style={{ 
+                  fontSize: '28px', 
+                  color: '#34495e', 
+                  marginBottom: '15px',
+                  fontWeight: '700'
+                }}>
                   مفيش مواضيع في الفئة دي حالياً
                 </h3>
-                <p style={{ fontSize: '16px', color: '#7f8c8d' }}>
+                <p style={{ 
+                  fontSize: '18px', 
+                  color: '#7f8c8d',
+                  lineHeight: '1.6'
+                }}>
                   جرب فئة تانية أو ارجع لكل المواضيع
                 </p>
               </div>
@@ -92,66 +103,43 @@ function App() {
         </div>
       </main>
 
-
+      <FAQ />
       
-      <footer style={{
-        background: '#2c3e50',
-        color: 'white',
-        padding: '40px 0 20px 0',
-        marginTop: '50px'
-      }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '30px',
-            marginBottom: '30px',
-            direction: 'rtl'
-          }}>
-            <div>
-              <h4 style={{ fontSize: '18px', marginBottom: '15px', color: '#ecf0f1' }}>
-                🧠 خليك فاهم
-              </h4>
-              <p style={{ marginBottom: '8px', color: '#bdc3c7', lineHeight: '1.6' }}>
-                دليلك الموثوق لمعرفة حقوقك
-              </p>
+      <footer className="professional-footer">
+        <div className="footer-content">
+          <div className="footer-grid">
+            <div className="footer-section">
+              <h4>🧠 خليك فاهم</h4>
+              <p>دليلك الموثوق لمعرفة حقوقك القانونية في جميع المجالات</p>
+              <p>نسعى لتوفير معلومات قانونية دقيقة ومبسطة للجميع</p>
             </div>
             
-            <div>
-              <h4 style={{ fontSize: '18px', marginBottom: '15px', color: '#ecf0f1' }}>
-                تواصل معنا
-              </h4>
-              <p style={{ marginBottom: '8px', color: '#bdc3c7', lineHeight: '1.6' }}>
-                📧 info@khalekfahem.com
-              </p>
-              <p style={{ marginBottom: '8px', color: '#bdc3c7', lineHeight: '1.6' }}>
-                📱 01000000000
-              </p>
+            <div className="footer-section">
+              <h4>تواصل معنا</h4>
+              <p>📧 info@khalekfahem.com</p>
+              <p>📱 01000000000</p>
+              <p>🌐 www.khalekfahem.com</p>
             </div>
             
-            <div>
-              <h4 style={{ fontSize: '18px', marginBottom: '15px', color: '#ecf0f1' }}>
-                روابط مفيدة
-              </h4>
-              <p style={{ marginBottom: '8px', color: '#bdc3c7', lineHeight: '1.6' }}>
-                • نقابة المحامين
-              </p>
-              <p style={{ marginBottom: '8px', color: '#bdc3c7', lineHeight: '1.6' }}>
-                • وزارة العدل
-              </p>
-              <p style={{ marginBottom: '8px', color: '#bdc3c7', lineHeight: '1.6' }}>
-                • حماية المستهلك
-              </p>
+            <div className="footer-section">
+              <h4>روابط مفيدة</h4>
+              <p>• نقابة المحامين المصرية</p>
+              <p>• وزارة العدل</p>
+              <p>• جهاز حماية المستهلك</p>
+              <p>• النيابة الإلكترونية</p>
+            </div>
+            
+            <div className="footer-section">
+              <h4>خدماتنا</h4>
+              <p>• استشارات قانونية</p>
+              <p>• دليل الحقوق</p>
+              <p>• الأسئلة الشائعة</p>
+              <p>• مواضيع متخصصة</p>
             </div>
           </div>
           
-          <div style={{
-            borderTop: '1px solid #34495e',
-            paddingTop: '20px',
-            textAlign: 'center',
-            color: '#95a5a6'
-          }}>
-            <p>© 2024 خليك فاهم - جميع الحقوق محفوظة</p>
+          <div className="footer-bottom">
+            <p>© 2024 خليك فاهم - جميع الحقوق محفوظة | مصمم بكل حب لخدمة القانون المصري</p>
           </div>
         </div>
       </footer>
