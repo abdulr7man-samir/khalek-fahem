@@ -1,3 +1,15 @@
+import { expandedTopics } from './expandedTopics';
+import { moreTopics } from './moreTopics';
+import { additionalTopics1 } from './additionalTopics1';
+import { massiveTopics1 } from './massiveTopics1';
+import { massiveTopics2 } from './massiveTopics2';
+import { dailyLifeTopics } from './dailyLifeTopics';
+import { megaTopics1 } from './megaTopics1';
+import { megaTopics2 } from './megaTopics2';
+import { superMegaTopics } from './superMegaTopics';
+import { ultraMegaTopics } from './ultraMegaTopics';
+import { finalMassiveTopics } from './finalMassiveTopics';
+
 export interface Topic {
   id: number;
   title: string;
@@ -5,6 +17,7 @@ export interface Topic {
   content: string;
   icon: string;
   color: string;
+  isPremium?: boolean;
 }
 
 export const categories = [
@@ -18,18 +31,6 @@ export const categories = [
   { id: 'family', name: 'الأسرة', icon: '👨‍👩‍👧‍👦' },
   { id: 'money', name: 'المالية', icon: '💰' }
 ];
-
-import { expandedTopics } from './expandedTopics';
-import { moreTopics } from './moreTopics';
-import { additionalTopics1 } from './additionalTopics1';
-import { massiveTopics1 } from './massiveTopics1';
-import { massiveTopics2 } from './massiveTopics2';
-import { dailyLifeTopics } from './dailyLifeTopics';
-import { megaTopics1 } from './megaTopics1';
-import { megaTopics2 } from './megaTopics2';
-import { superMegaTopics } from './superMegaTopics';
-import { ultraMegaTopics } from './ultraMegaTopics';
-import { finalMassiveTopics } from './finalMassiveTopics';
 
 export const topics: Topic[] = [
   {
