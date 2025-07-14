@@ -6,8 +6,6 @@ import { topics, Topic } from './data/topics';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [showPremiumModal, setShowPremiumModal] = useState(false);
-  const [selectedPremiumTopic, setSelectedPremiumTopic] = useState<Topic | null>(null);
 
   const filteredTopics = useMemo(() => {
     if (selectedCategory === 'all') {
@@ -15,16 +13,6 @@ function App() {
     }
     return topics.filter(topic => topic.category === selectedCategory);
   }, [selectedCategory]);
-
-  const handlePremiumClick = (topic: Topic) => {
-    setSelectedPremiumTopic(topic);
-    setShowPremiumModal(true);
-  };
-
-  const closePremiumModal = () => {
-    setShowPremiumModal(false);
-    setSelectedPremiumTopic(null);
-  };
 
   return (
     <div style={{
@@ -79,7 +67,6 @@ function App() {
                 <TopicCard 
                   key={topic.id}
                   topic={topic}
-                  onReadMore={handlePremiumClick}
                 />
               ))}
             </div>
@@ -105,176 +92,7 @@ function App() {
         </div>
       </main>
 
-      {/* Premium Modal */}
-      {showPremiumModal && selectedPremiumTopic && (
-        <div style={{
-          position: 'fixed',
-          top: '0',
-          left: '0',
-          right: '0',
-          bottom: '0',
-          background: 'rgba(0, 0, 0, 0.7)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: '1000',
-          padding: '20px'
-        }} onClick={closePremiumModal}>
-          <div style={{
-            background: 'white',
-            borderRadius: '20px',
-            maxWidth: '500px',
-            width: '100%',
-            maxHeight: '90vh',
-            overflowY: 'auto',
-            position: 'relative',
-            direction: 'rtl',
-            textAlign: 'right'
-          }} onClick={(e) => e.stopPropagation()}>
-            <button 
-              style={{
-                position: 'absolute',
-                top: '15px',
-                left: '20px',
-                background: '#ff6b6b',
-                color: 'white',
-                border: 'none',
-                borderRadius: '50%',
-                width: '30px',
-                height: '30px',
-                fontSize: '20px',
-                cursor: 'pointer'
-              }}
-              onClick={closePremiumModal}
-            >
-              ×
-            </button>
-            
-            <div style={{
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-              color: 'white',
-              padding: '30px',
-              textAlign: 'center',
-              borderRadius: '20px 20px 0 0'
-            }}>
-              <div style={{ fontSize: '50px', marginBottom: '15px' }}>👑</div>
-              <h2 style={{ fontSize: '24px', marginBottom: '10px' }}>اشتراك مميز</h2>
-              <p style={{ opacity: '0.9', fontSize: '16px' }}>للوصول للمحتوى المميز</p>
-            </div>
-            
-            <div style={{ padding: '30px' }}>
-              <h3 style={{ fontSize: '20px', color: '#2c3e50', marginBottom: '15px' }}>
-                {selectedPremiumTopic.title}
-              </h3>
-              <p>هذا المحتوى متاح فقط للمشتركين المميزين</p>
-              
-              <div style={{ margin: '25px 0' }}>
-                <div style={{ padding: '10px 0', fontSize: '16px', color: '#27ae60', fontWeight: '500' }}>
-                  ✅ محتوى تفصيلي ودقيق
-                </div>
-                <div style={{ padding: '10px 0', fontSize: '16px', color: '#27ae60', fontWeight: '500' }}>
-                  ✅ نصائح من خبراء قانونيين
-                </div>
-                <div style={{ padding: '10px 0', fontSize: '16px', color: '#27ae60', fontWeight: '500' }}>
-                  ✅ تحديثات مستمرة
-                </div>
-                <div style={{ padding: '10px 0', fontSize: '16px', color: '#27ae60', fontWeight: '500' }}>
-                  ✅ استشارات مجانية
-                </div>
-              </div>
-              
-              <div style={{ display: 'grid', gap: '20px', marginTop: '30px' }}>
-                <div style={{
-                  border: '2px solid #e9ecef',
-                  borderRadius: '15px',
-                  padding: '20px',
-                  textAlign: 'center'
-                }}>
-                  <h4 style={{ fontSize: '18px', marginBottom: '15px', color: '#2c3e50' }}>
-                    الاشتراك الشهري
-                  </h4>
-                  <div style={{ marginBottom: '15px', fontSize: '24px', fontWeight: '700', color: '#e74c3c' }}>
-                    29 جنيه/شهر
-                  </div>
-                  <button style={{
-                    width: '100%',
-                    padding: '12px',
-                    border: 'none',
-                    borderRadius: '25px',
-                    fontSize: '16px',
-                    fontWeight: '600',
-                    cursor: 'pointer',
-                    background: '#3498db',
-                    color: 'white'
-                  }}>
-                    اشترك الآن
-                  </button>
-                </div>
-                
-                <div style={{
-                  border: '2px solid #ffd700',
-                  borderRadius: '15px',
-                  padding: '20px',
-                  textAlign: 'center',
-                  background: 'linear-gradient(135deg, #fff9e6 0%, #fff5cc 100%)',
-                  position: 'relative'
-                }}>
-                  <div style={{
-                    position: 'absolute',
-                    top: '-10px',
-                    right: '20px',
-                    background: '#ffd700',
-                    color: '#333',
-                    padding: '5px 15px',
-                    borderRadius: '15px',
-                    fontSize: '12px',
-                    fontWeight: '700'
-                  }}>
-                    الأكثر شعبية
-                  </div>
-                  <h4 style={{ fontSize: '18px', marginBottom: '15px', color: '#2c3e50' }}>
-                    الاشتراك السنوي
-                  </h4>
-                  <div style={{ marginBottom: '15px' }}>
-                    <span style={{
-                      textDecoration: 'line-through',
-                      color: '#95a5a6',
-                      fontSize: '14px',
-                      marginLeft: '10px'
-                    }}>
-                      348 جنيه
-                    </span>
-                    <span style={{ fontSize: '24px', fontWeight: '700', color: '#e74c3c' }}>
-                      299 جنيه/سنة
-                    </span>
-                  </div>
-                  <div style={{
-                    color: '#27ae60',
-                    fontWeight: '600',
-                    fontSize: '14px',
-                    marginBottom: '15px'
-                  }}>
-                    وفّر 49 جنيه!
-                  </div>
-                  <button style={{
-                    width: '100%',
-                    padding: '12px',
-                    border: 'none',
-                    borderRadius: '25px',
-                    fontSize: '16px',
-                    fontWeight: '600',
-                    cursor: 'pointer',
-                    background: '#ffd700',
-                    color: '#333'
-                  }}>
-                    اشترك الآن
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+
       
       <footer style={{
         background: '#2c3e50',
