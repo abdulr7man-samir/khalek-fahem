@@ -22,6 +22,14 @@ export const categories = [
 import { expandedTopics } from './expandedTopics';
 import { moreTopics } from './moreTopics';
 import { additionalTopics1 } from './additionalTopics1';
+import { massiveTopics1 } from './massiveTopics1';
+import { massiveTopics2 } from './massiveTopics2';
+import { dailyLifeTopics } from './dailyLifeTopics';
+import { megaTopics1 } from './megaTopics1';
+import { megaTopics2 } from './megaTopics2';
+import { superMegaTopics } from './superMegaTopics';
+import { ultraMegaTopics } from './ultraMegaTopics';
+import { finalMassiveTopics } from './finalMassiveTopics';
 
 export const topics: Topic[] = [
   {
@@ -59,5 +67,13 @@ export const topics: Topic[] = [
   // دمج جميع المواضيع الجديدة
   ...expandedTopics,
   ...moreTopics,
-  ...additionalTopics1
+  ...additionalTopics1,
+  ...massiveTopics1,
+  ...massiveTopics2,
+  ...dailyLifeTopics,
+  ...megaTopics1,
+  ...megaTopics2,
+  ...superMegaTopics,
+  ...ultraMegaTopics,
+  ...finalMassiveTopics
 ];
