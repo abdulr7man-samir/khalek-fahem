@@ -13,31 +13,46 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic }) => {
   };
 
   return (
-    <div className="topic-card" onClick={handleClick}>
-      <div className="topic-header">
-        <div className="topic-icon" style={{ backgroundColor: topic.color }}>
-          {topic.icon}
+    <div className="modern-topic-card" onClick={handleClick}>
+      <div className="topic-card-header">
+        <div className="topic-icon-wrapper" style={{ backgroundColor: topic.color }}>
+          <span className="topic-icon">{topic.icon}</span>
         </div>
-        <h3 className="topic-title">
-          {topic.title}
-        </h3>
+        <h3 className="topic-title">{topic.title}</h3>
+        <button className="expand-icon">
+          {isExpanded ? '▲' : '▼'}
+        </button>
       </div>
       
-      {isExpanded && (
-        <div className="topic-content">
-          <p className="topic-text">
-            {topic.content}
-          </p>
+      <div className={`topic-content ${isExpanded ? 'expanded' : ''}`}>
+        <div className="topic-text">
+          {topic.content}
         </div>
-      )}
+      </div>
       
-      <div className="topic-button">
-        <button className="topic-btn" style={{ background: topic.color }}>
-          {isExpanded ? 'أخفي التفاصيل' : 'اقرأ المزيد'}
-        </button>
+      <div className="topic-footer">
+        <div className="topic-category">{getCategoryName(topic.category)}</div>
+        <div className="read-more-text">
+          {isExpanded ? 'اضغط لإخفاء التفاصيل' : 'اضغط لقراءة المزيد'}
+        </div>
       </div>
     </div>
   );
+};
+
+// Helper function to get category name in Arabic
+const getCategoryName = (categoryId: string): string => {
+  const categoryMap: { [key: string]: string } = {
+    'legal': 'القانونية',
+    'tech': 'التقنية', 
+    'consumer': 'حماية المستهلك',
+    'work': 'العمل',
+    'health': 'الصحة',
+    'education': 'التعليم',
+    'family': 'الأسرة',
+    'money': 'المالية'
+  };
+  return categoryMap[categoryId] || categoryId;
 };
 
 export default TopicCard;

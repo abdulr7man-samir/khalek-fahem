@@ -1,12 +1,27 @@
 import React from 'react';
+import './Header.css';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  onMenuClick: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
   return (
     <header className="professional-header">
       <div className="header-content">
-        <div className="header-title">
-          <div className="header-icon">🧠</div>
-          <h1>خليك فاهم !</h1>
+        <div className="header-top">
+          <button className="menu-button" onClick={onMenuClick}>
+            <span className="menu-icon">☰</span>
+          </button>
+          
+          <div className="header-title">
+            <div className="header-icon">🧠</div>
+            <h1>خليك فاهم !</h1>
+          </div>
+          
+          <div className="header-actions">
+            <span className="app-version">v1.0</span>
+          </div>
         </div>
         
         <p className="header-subtitle">
@@ -15,7 +30,7 @@ const Header: React.FC = () => {
         
         <div className="stats-container">
           <div className="stat-card">
-            <div className="stat-number">25+</div>
+            <div className="stat-number">1000+</div>
             <div className="stat-label">موضوع مهم</div>
           </div>
           
