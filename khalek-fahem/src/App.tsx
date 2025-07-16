@@ -11,7 +11,7 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [currentView, setCurrentView] = useState('home'); // home, topics, about, contact
+  const [currentView, setCurrentView] = useState('home'); // home, topics, about, contact, all-topics
 
   const filteredTopics = useMemo(() => {
     let filtered = topics;
@@ -44,6 +44,9 @@ function App() {
     if (view === 'home') {
       setSelectedCategory('');
       setSearchQuery('');
+    } else if (view === 'all-topics') {
+      setSelectedCategory('all');
+      setSearchQuery('');
     }
   };
 
@@ -63,7 +66,7 @@ function App() {
           
           <div className="hero-stats">
             <div className="stat">
-              <div className="stat-number">{topics.length}+</div>
+              <div className="stat-number">{topics.length.toLocaleString()}+</div>
               <div className="stat-label">موضوع متاح</div>
             </div>
             <div className="stat">
@@ -81,6 +84,18 @@ function App() {
       <div className="categories-showcase">
         <h2 className="section-title">اختر المجال اللي يهمك</h2>
         <div className="categories-grid">
+          {/* All Topics Card */}
+          <div 
+            className="category-showcase-card"
+            onClick={() => handleNavigation('all-topics')}
+          >
+            <div className="category-icon">📚</div>
+            <h3 className="category-name">كل المواضيع</h3>
+            <p className="category-count">
+              {topics.length} موضوع
+            </p>
+          </div>
+          
           {categories.slice(1).map(category => (
             <div 
               key={category.id}
@@ -129,13 +144,15 @@ function App() {
     <div className="topics-view">
       <div className="topics-header">
         <h2 className="section-title">
-          {selectedCategory ? 
-            categories.find(c => c.id === selectedCategory)?.name + ' 📋' : 
-            '🔍 نتائج البحث'
+          {selectedCategory === 'all' ? 
+            '📚 كل المواضيع' :
+            selectedCategory ? 
+              categories.find(c => c.id === selectedCategory)?.name + ' 📋' : 
+              '🔍 نتائج البحث'
           }
         </h2>
         <p className="section-subtitle">
-          {filteredTopics.length} موضوع متاح
+          {filteredTopics.length.toLocaleString()} موضوع متاح
         </p>
       </div>
       
@@ -172,6 +189,12 @@ function App() {
           <p>
             نسعى لأن نكون المصدر الأول والأكثر موثوقية للمعلومات القانونية والحقوقية في مصر،
             ونهدف إلى خلق مجتمع واعٍ بحقوقه وقادر على المطالبة بها.
+          </p>
+          
+          <h3>مهمتنا</h3>
+          <p>
+            تقديم المعلومات القانونية والحقوقية بطريقة مبسطة ومفهومة لجميع فئات المجتمع،
+            مع التركيز على الحالات العملية التي يواجهها المواطن في حياته اليومية.
           </p>
           
           <h3>فريق العمل</h3>
@@ -271,7 +294,7 @@ function App() {
       
       <main className="main-content">
         <div className="container">
-          {(currentView === 'topics' || searchQuery) && (
+          {((currentView === 'topics' || currentView === 'all-topics') || searchQuery) && (
             <>
               <SearchBar 
                 searchQuery={searchQuery}
@@ -286,7 +309,7 @@ function App() {
           )}
           
           {currentView === 'home' && !searchQuery && renderHomeView()}
-          {(currentView === 'topics' || searchQuery) && renderTopicsView()}
+          {((currentView === 'topics' || currentView === 'all-topics') || searchQuery) && renderTopicsView()}
           {currentView === 'about' && renderAboutView()}
           {currentView === 'contact' && renderContactView()}
         </div>
@@ -305,6 +328,7 @@ function App() {
               <h4>روابط سريعة</h4>
               <ul className="footer-links">
                 <li><button onClick={() => handleNavigation('home')}>الرئيسية</button></li>
+                <li><button onClick={() => handleNavigation('all-topics')}>كل المواضيع</button></li>
                 <li><button onClick={() => handleNavigation('about')}>عن التطبيق</button></li>
                 <li><button onClick={() => handleNavigation('contact')}>تواصل معنا</button></li>
               </ul>

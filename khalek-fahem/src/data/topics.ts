@@ -9,6 +9,7 @@ import { megaTopics2 } from './megaTopics2';
 import { superMegaTopics } from './superMegaTopics';
 import { ultraMegaTopics } from './ultraMegaTopics';
 import { finalMassiveTopics } from './finalMassiveTopics';
+import { professionalMegaTopics } from './professionalMegaTopics';
 
 export interface Topic {
   id: number;
@@ -65,7 +66,7 @@ export const topics: Topic[] = [
     icon: "💔",
     color: "#A55EEA"
   },
-  // دمج جميع المواضيع الجديدة
+  // دمج جميع المواضيع الجديدة والمحسنة
   ...expandedTopics,
   ...moreTopics,
   ...additionalTopics1,
@@ -76,5 +77,74 @@ export const topics: Topic[] = [
   ...megaTopics2,
   ...superMegaTopics,
   ...ultraMegaTopics,
-  ...finalMassiveTopics
+  ...finalMassiveTopics,
+  ...professionalMegaTopics
 ];
+
+// إحصائيات المواضيع لكل فئة
+export const getTopicsCountByCategory = () => {
+  const counts: { [key: string]: number } = {};
+  
+  categories.forEach(category => {
+    if (category.id === 'all') {
+      counts[category.id] = topics.length;
+    } else {
+      counts[category.id] = topics.filter(topic => topic.category === category.id).length;
+    }
+  });
+  
+  return counts;
+};
+
+// البحث في المواضيع
+export const searchTopics = (query: string, category?: string) => {
+  let filtered = topics;
+  
+  if (category && category !== 'all') {
+    filtered = filtered.filter(topic => topic.category === category);
+  }
+  
+  if (query.trim()) {
+    filtered = filtered.filter(topic => 
+      topic.title.toLowerCase().includes(query.toLowerCase()) ||
+      topic.content.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+  
+  return filtered;
+};
+
+// الحصول على مواضيع عشوائية
+export const getRandomTopics = (count: number = 5) => {
+  const shuffled = [...topics].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+};
+
+// الحصول على المواضيع الأكثر شعبية (محاكاة)
+export const getPopularTopics = (count: number = 10) => {
+  // محاكاة شعبية المواضيع بناءً على الفئة والمحتوى
+  const popularTopics = topics
+    .filter(topic => 
+      topic.category === 'legal' || 
+      topic.category === 'work' || 
+      topic.category === 'consumer'
+    )
+    .slice(0, count);
+  
+  return popularTopics;
+};
+
+// الحصول على مواضيع مشابهة
+export const getSimilarTopics = (topicId: number, count: number = 5) => {
+  const currentTopic = topics.find(t => t.id === topicId);
+  if (!currentTopic) return [];
+  
+  const similarTopics = topics
+    .filter(topic => 
+      topic.id !== topicId && 
+      topic.category === currentTopic.category
+    )
+    .slice(0, count);
+  
+  return similarTopics;
+};

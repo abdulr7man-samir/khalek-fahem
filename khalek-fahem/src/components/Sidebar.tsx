@@ -11,7 +11,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onNavigate, currentView }) => {
   const menuItems = [
     { id: 'home', label: 'الرئيسية', icon: '🏠' },
-    { id: 'topics', label: 'المواضيع', icon: '📚' },
+    { id: 'all-topics', label: 'كل المواضيع', icon: '📚' },
     { id: 'about', label: 'عن التطبيق', icon: 'ℹ️' },
     { id: 'contact', label: 'تواصل معنا', icon: '📞' }
   ];
@@ -91,7 +91,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onNavigate, currentV
           </div>
 
           <div className="sidebar-footer">
-            <p className="app-version">الإصدار 1.0</p>
+            <p className="app-version">الإصدار 2.0</p>
             <p className="copyright">© 2024 خليك فاهم</p>
           </div>
         </div>
