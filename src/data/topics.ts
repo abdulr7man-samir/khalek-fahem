@@ -6,6 +6,10 @@ export interface Topic {
   icon: string;
   color: string;
   isPremium?: boolean;
+  // Optional metadata
+  tags?: string[];
+  difficulty?: 'easy' | 'medium' | 'hard';
+  lastUpdated?: string;
 }
 
 export const categories = [

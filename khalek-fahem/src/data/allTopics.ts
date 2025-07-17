@@ -133,12 +133,13 @@ const uniqueTopics = allTopicsRaw.filter(topic => {
   return true;
 });
 
-// Add metadata to existing topics that don't have it
-export const allTopics: Topic[] = uniqueTopics.map(topic => ({
+// Add metadata to existing topics that don't have it. We treat incoming topics as
+// Partial<Topic> because not every imported source defines the optional fields.
+export const allTopics: Topic[] = (uniqueTopics as Array<Partial<Topic>>).map(topic => ({
   ...topic,
-  tags: topic.tags || [],
-  difficulty: topic.difficulty || 'easy',
-  lastUpdated: topic.lastUpdated || new Date().toISOString()
+  tags: topic.tags ?? [],
+  difficulty: topic.difficulty ?? 'easy',
+  lastUpdated: topic.lastUpdated ?? new Date().toISOString()
 }));
 
 // Export consolidated topics

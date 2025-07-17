@@ -19,6 +19,7 @@ export interface Topic {
   icon: string;
   color: string;
   isPremium?: boolean;
+  // Optional metadata that may be added programmatically
   tags?: string[];
   difficulty?: 'easy' | 'medium' | 'hard';
   lastUpdated?: string;
