@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Topic } from '../data/topics';
+import './TopicCard.css';
 
 interface TopicCardProps {
   topic: Topic;
@@ -12,14 +13,36 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic }) => {
     setIsExpanded(!isExpanded);
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      setIsExpanded(!isExpanded);
+    }
+  };
+
   return (
-    <div className="modern-topic-card" onClick={handleClick}>
+    <div 
+      className="modern-topic-card fade-in" 
+      onClick={handleClick}
+      onKeyPress={handleKeyPress}
+      tabIndex={0}
+      role="button"
+      aria-expanded={isExpanded}
+      data-category={topic.category}
+    >
       <div className="topic-card-header">
         <div className="topic-icon-wrapper" style={{ backgroundColor: topic.color }}>
           <span className="topic-icon">{topic.icon}</span>
         </div>
         <h3 className="topic-title">{topic.title}</h3>
-        <button className="expand-icon">
+        <button 
+          className="expand-icon"
+          aria-label={isExpanded ? 'إخفاء التفاصيل' : 'عرض التفاصيل'}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsExpanded(!isExpanded);
+          }}
+        >
           {isExpanded ? '▲' : '▼'}
         </button>
       </div>
