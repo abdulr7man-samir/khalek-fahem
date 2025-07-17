@@ -19,6 +19,9 @@ export interface Topic {
   icon: string;
   color: string;
   isPremium?: boolean;
+  tags?: string[];
+  difficulty?: 'easy' | 'medium' | 'hard';
+  lastUpdated?: string;
 }
 
 export const categories = [
