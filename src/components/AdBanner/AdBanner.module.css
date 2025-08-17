@@ -1,0 +1,15 @@
+.adBanner {
+  background-color: #4a4a6a;
+  border: 2px dashed #9ca3af;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  margin: 40px 0;
+}
+
+.adText {
+  color: #d1d5db;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+}

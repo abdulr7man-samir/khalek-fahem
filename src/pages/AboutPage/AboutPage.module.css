@@ -1,0 +1,28 @@
+.aboutPage {
+  background-color: #2c2c3e;
+  padding: 40px;
+  border-radius: 12px;
+  border: 1px solid #4a4a6a;
+}
+
+.title {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 30px;
+  color: #f9fafb;
+}
+
+.content {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #d1d5db;
+}
+
+.content h2 {
+  font-size: 24px;
+  color: #e5e7eb;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #8A2BE2;
+  padding-bottom: 5px;
+}

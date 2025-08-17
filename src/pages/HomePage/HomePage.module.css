@@ -1,0 +1,145 @@
+/* Hero Section */
+.heroSection {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  border-radius: 20px;
+  margin-bottom: 60px;
+}
+
+.heroTitle {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #8A2BE2 0%, #4B0082 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heroSubtitle {
+  font-size: 20px;
+  color: #d1d5db;
+  margin-bottom: 20px;
+}
+
+.heroDescription {
+  font-size: 16px;
+  color: #9ca3af;
+  max-width: 600px;
+  margin: 0 auto 30px auto;
+}
+
+.heroStats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.statNumber {
+  font-size: 28px;
+  font-weight: 700;
+  color: #e5e7eb;
+}
+
+.statLabel {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* General Section Styles */
+.sectionTitle {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #f9fafb;
+}
+
+/* Categories Showcase */
+.categoriesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.categoryCard {
+  background-color: #2c2c3e;
+  border-radius: 12px;
+  padding: 25px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #4a4a6a;
+}
+
+.categoryCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.categoryIcon {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.categoryName {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.categoryCount {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* Features Section */
+.featuresSection {
+  margin-top: 60px;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.featureCard {
+  background-color: #2c2c3e;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  border: 1px solid #4a4a6a;
+}
+
+.featureIcon {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.featureCard h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.featureCard p {
+  font-size: 14px;
+  color: #9ca3af;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 36px;
+  }
+  .sectionTitle {
+    font-size: 28px;
+  }
+}
